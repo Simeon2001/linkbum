@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework import generics
-from .serializers import profile_create,siteserial,social_serializer,feedserial
+from .serializers import profile_create,siteserial,social_serializer,feedserial,UserSerializer
 from .models import profile,Social_Media,site_links,feedback
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -8,12 +8,16 @@ from rest_framework.permissions import AllowAny,IsAuthenticated
 from django.contrib.auth.models import User 
 from rest_framework	import status
 from django.contrib.auth import get_user_model 
+from rest_framework import permissions
+from rest_framework.parsers import JSONParser
+from rest_framework.authentication import TokenAuthentication
 
 
 # Create your views here.
 
 @api_view(['get'])
 def profilex (request):
+    authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
     b = request.user
     t = profile.objects.get(user=b)
@@ -23,6 +27,7 @@ def profilex (request):
 
 @api_view(['post'])
 def post_profilex (request):
+    authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
     if	request.method	==	'POST':
         user = request.user
@@ -40,6 +45,7 @@ def post_profilex (request):
 # social media view vccgg
 @api_view(['get'])
 def soclink (request):
+    authentication_classes = (TokenAuthentication,)	
     permission_classes = (IsAuthenticated,)
     if	request.method	==	'GET':
         b = request.user
@@ -52,6 +58,7 @@ def soclink (request):
 # social media link post request
 @api_view(['post'])
 def post_soclink (request):
+    authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
     if	request.method	==	'POST':
         b = request.user
@@ -73,6 +80,7 @@ def post_soclink (request):
 # POST LINK VIEW
 @api_view(['post'])
 def post_libum (request):
+    authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
     if	request.method	==	'POST':
         url_link = request.data.get("url")
@@ -91,8 +99,14 @@ def post_libum (request):
 
 @api_view()
 def fed (request,pk):
+    authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
     n = feedback.objects.filter(user=pk)
     serializer_class = feedserial(n,many=True)
     return Response(serializer_class.data)
 
+class UserCreateView(generics.CreateAPIView):
+    model = get_user_model()
+    parser_classes = [JSONParser]
+    permission_classes = [permissions.AllowAny]
+    serializer_class = UserSerializer
