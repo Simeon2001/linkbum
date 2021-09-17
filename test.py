@@ -3,23 +3,23 @@ from requests.structures import CaseInsensitiveDict
 import json
 
 
-url = 'http://127.0.0.1:8000/lt/profile'
+url = 'http://127.0.0.1:8000/api/links'
 headers = CaseInsensitiveDict()
 
 headers["Content-Type"] = "application/json"
 headers["Authorization"] = "Token 0f0d7f926cb8da8faeffbec60377509ec94ed920"
 
-username = 'toshiba'
+username = 'http://127.0.0.1:8000/api/'
 password = 'bigwiz2021'
 
 info = {
   
-  "username": username,
+  "url": username,
   
-  "password": password
+  "info": password
 }
 
 data = json.dumps(info,indent=2)
 
-resp = requests.get(url, headers=headers)
+resp = requests.post(url, headers=headers,data=data)
 print(resp.json())

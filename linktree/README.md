@@ -38,8 +38,8 @@ the Authorization format is "Token (the user token)"
 * TO ADD A LINK http://127.0.0.1:8000/api/links pass a POST request and authorization in the header and json data:
 -----------------------------
 {
-    "url_link":"url u want to share",
-    "details":"short info about the url"
+    "url":"url u want to share",
+    "info":"short info about the url"
 
 }
 ------------------------------
