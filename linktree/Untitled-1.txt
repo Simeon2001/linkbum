@@ -1,0 +1,4 @@
+curl -X POST -d "{"username":"sim","password":"sim"}" http://127.0.0.1:8000/s/token
+curl --header 'Content-Type:application/json' -X POST --data '{"username":"sim","password":"sim"}' http://127.0.0.1:8000/s/token
+curl -X GET http://127.0.0.1:8000/sim/
+curl -X GET http://127.0.0.1:8000/lt/profile
