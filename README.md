@@ -9,6 +9,7 @@ a linktree clone API which is use to put important links(product link,your new r
 {
     "username":"hartech",
     "password":"Linktree2021"
+    "email":"hartech@gmail.com"
 
 }
 ------------------------------
