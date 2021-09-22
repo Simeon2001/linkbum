@@ -100,7 +100,7 @@ def post_libum (request):
 @api_view()
 def fed (request,pk):
     authentication_classes = (TokenAuthentication,)
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (permissions.AllowAny)
     n = feedback.objects.filter(user=pk)
     serializer_class = feedserial(n,many=True)
     return Response(serializer_class.data)
