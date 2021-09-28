@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework import generics
-from .serializers import profile_create,siteserial,social_serializer,feedserial,UserSerializer
+from .serializers import profile_create,social_serializer,UserSerializer
 from .models import profile,Social_Media,site_links,feedback
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -87,7 +87,8 @@ def post_libum (request):
         details = request.data.get("info")
         name = request.user
         t = profile.objects.get(user=name)
-        x  = site_links.objects.create(users=t,url_link=url_link,details=details)
+        j = Social_Media.objects.get(user=t)
+        x  = site_links.objects.create(users=j,url_link=url_link,details=details)
         x.save()
         return Response(
             {
@@ -100,7 +101,7 @@ def post_libum (request):
 @api_view()
 def fed (request,pk):
     authentication_classes = (TokenAuthentication,)
-    permission_classes = (permissions.AllowAny)
+    permission_classes = (IsAuthenticated,)
     n = feedback.objects.filter(user=pk)
     serializer_class = feedserial(n,many=True)
     return Response(serializer_class.data)

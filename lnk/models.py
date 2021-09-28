@@ -8,6 +8,9 @@ class profile (models.Model):
     user = models.OneToOneField(User, blank=False, on_delete=models.CASCADE,related_name='profiles')
     pics = models.CharField(max_length=100, blank=True)
     info = models.CharField(max_length=70, blank=True)
+
+    def __str__(self):
+        return self.user.username
     
 
 # social media link
@@ -23,7 +26,7 @@ class Social_Media (models.Model):
 
 #links to things
 class site_links (models.Model):
-    users = models.ForeignKey(profile, blank=False, on_delete=models.CASCADE, related_name='name')
+    users = models.ForeignKey(Social_Media, blank=False, on_delete=models.CASCADE, related_name='name')
     url_link  = models.URLField(max_length=1000, blank=False)
     details = models.TextField(max_length=30, blank=False)
     clicks = models.IntegerField(default=0)

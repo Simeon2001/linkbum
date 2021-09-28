@@ -5,13 +5,14 @@ from rest_framework.authtoken.models import Token
 
 UserModel = get_user_model()
 
+"""
 class feedserial (serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = feedback
         fields = ['id','msg']
 
-class siteserial (serializers.HyperlinkedModelSerializer):
+class siteserialcreate (serializers.HyperlinkedModelSerializer):
     feeds = feedserial(many=True)
     
 
@@ -19,16 +20,16 @@ class siteserial (serializers.HyperlinkedModelSerializer):
         model = site_links
         fields = ['id', 'url_link', 'details', 'clicks','feeds']
         
-
+"""
 
 #profile serializers
 class profile_create (serializers.ModelSerializer):
-    name = siteserial(many=True)
+    
     user = serializers.ReadOnlyField(source='user.username')
     
     class Meta:
         model = profile
-        fields = ['id', 'user', 'pics', 'info','name']
+        fields = ['id', 'user', 'pics', 'info']
 
 class social_serializer (serializers.ModelSerializer):
     user = profile_create()
@@ -48,4 +49,4 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = get_user_model()
-        fields = ["email" ,"username", "password",]
+        fields = [ "email","username", "password"]
