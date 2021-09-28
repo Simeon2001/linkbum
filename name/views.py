@@ -14,7 +14,7 @@ def libum (request,uname):
     permission_classes = (AllowAny,)
     name = User.objects.get(username=uname) 
     t = profile.objects.get(user=name)
-    j = Social_Media.objects.get(user=t)
+    j,created = Social_Media.objects.get_or_create(user=t)
     x  = site_links.objects.filter(users=j)
     serializer_class = siteserial(x,many=True)
     return Response(serializer_class.data)
