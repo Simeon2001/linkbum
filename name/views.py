@@ -13,7 +13,7 @@ from rest_framework.response import Response
 def libum (request,uname):
     permission_classes = (AllowAny,)
     name = User.objects.get(username=uname) 
-    t = profile.objects.get(user=name)
+    t,created = profile.objects.get_or_create(user=name)
     j,created = Social_Media.objects.get_or_create(user=t)
     x  = site_links.objects.filter(users=j)
     serializer_class = siteserial(x,many=True)
