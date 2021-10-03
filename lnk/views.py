@@ -86,8 +86,8 @@ def post_libum (request):
         url_link = request.data.get("url")
         details = request.data.get("info")
         name = request.user
-        t = profile.objects.get(user=name)
-        j = Social_Media.objects.get(user=t)
+        t,created = profile.objects.get_or_create(user=name)
+        j = Social_Media.objects.get_or_create(user=t)
         x  = site_links.objects.create(users=j,url_link=url_link,details=details)
         x.save()
         return Response(
