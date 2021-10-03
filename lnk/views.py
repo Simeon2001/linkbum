@@ -98,6 +98,7 @@ def post_libum (request):
             }
         )
 
+"""
 @api_view()
 def fed (request,pk):
     authentication_classes = (TokenAuthentication,)
@@ -105,11 +106,10 @@ def fed (request,pk):
     n = feedback.objects.filter(user=pk)
     serializer_class = feedserial(n,many=True)
     return Response(serializer_class.data)
-
 """
+
 class UserCreateView(generics.CreateAPIView):
     model = get_user_model()
     parser_classes = [JSONParser]
     permission_classes = [permissions.AllowAny]
     serializer_class = UserSerializer
-"""
