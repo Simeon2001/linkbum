@@ -15,7 +15,8 @@ a linktree clone API which is use to put important links(product link,your new r
 ------------------------------
 after registering it automatically create an authtoken.
 
-* TO LOGIN USE http://127.0.0.1:8000/api/token to determine if the user have an account, you can pass this post request with this json data: -----------------------------
+* TO LOGIN USE http://127.0.0.1:8000/api/token to determine if the user have an account, you can pass this post request with this json data: 
+----------
 {
     "username":"hartech",
     "password":"Linktree2021"
@@ -46,3 +47,18 @@ the Authorization format is "Token (the user token)"
 ------------------------------
 
 * TO VIEW LINKS SHARED BY CERTAIN USER http://127.0.0.1:8000/USERNAME pass a GET request.
+
+* TO ADD SOCIAL MEDIA LINK FOR A USER http://127.0.0.1:8000/api/slink/create pass a post request.
+
+  pass the token to the header, then json data:
+
+  ---------------------
+  {
+      "fbk":"http//facebook.com",
+      "twr":"http//twitter.com",
+      "ins":"http//instagram.com",
+      "whp":"http//api.whatsapp.com",
+      "snt":"http//snapchat.com",
+      "gtb":"http//github.com",
+  } 
+-----
