@@ -147,7 +147,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
-#if os.getcwd()=='/app':
-#    DEBUG=False
+if os.getcwd()=='/app':
+    DEBUG=False
 
 CORS_ORIGIN_ALLOW_ALL = True

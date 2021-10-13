@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 #profile info
 class profile (models.Model):
     user = models.OneToOneField(User, blank=False, on_delete=models.CASCADE,related_name='profiles')
-    pics = models.CharField(max_length=100, blank=True)
+    pics = models.CharField(max_length=1000, blank=True)
     info = models.CharField(max_length=70, blank=True)
 
     def __str__(self):
