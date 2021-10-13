@@ -33,7 +33,9 @@ def post_profilex (request):
         user = request.user
         pics = request.data.get("pics")
         info = request.data.get("info")
-        create,created = profile.objects.get_or_create(user=user,pics=pics,info=info)
+        create, created = profile.objects.get_or_create(user=user)
+        create.pics = pics
+        create.info = info
         create.save()
         serializer_class = profile_create(create)
         print (user.id,pics,info)
