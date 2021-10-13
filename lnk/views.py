@@ -71,7 +71,13 @@ def post_soclink (request):
         snt = request.data.get("snt")
         gtb = request.data.get("gtb")
         pro_orm,created = profile.objects.get_or_create(user=b)
-        c,created = Social_Media.objects.get_or_create(user=pro_orm,fbk=fbk,twr=twr,ins=ins,whp=whp,snt=snt,gtb=gtb)
+        c,created = Social_Media.objects.get_or_create(user=pro_orm)
+        c.fbk = fbk
+        c.twr = twr
+        c.ins = ins
+        c.whp = whp
+        c.snt = snt
+        c.gtb = gtb
         c.save()
         serializer_class = social_serializer(c)
         return Response(serializer_class.data)
