@@ -1,1 +1,0 @@
-web: gunicorn linktree.wsgi --log-file -

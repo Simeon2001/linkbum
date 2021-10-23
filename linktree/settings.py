@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
-import dj_database_url
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -26,7 +25,7 @@ SECRET_KEY = 'django-insecure-0ztkwtoxbdazw=m7d!+sw&%mshfaxe_e4u15fhm)&56d&0y39-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['li-bum.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -35,8 +34,7 @@ INSTALLED_APPS = [
     'lnk',
     'name',
     'rest_framework',
-    'rest_framework.authtoken',
-    'corsheaders', 
+    'knox',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -46,7 +44,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -55,7 +52,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'linktree.urls'
@@ -76,6 +72,12 @@ TEMPLATES = [
     },
 ]
 
+#REST_FRAMEWORK = {
+#    'DEFAULT_AUTHENTICATION_CLASSES': [
+#        'knox.auth.TokenAuthentication',
+#    ]
+#}
+
 WSGI_APPLICATION = 'linktree.wsgi.application'
 
 
@@ -88,8 +90,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-db_from_env = dj_database_url.config(conn_max_age=600)
-DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -134,11 +134,6 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES':('rest_framework.authentication.BasicAuthentication',
-    'rest_framework.authentication.TokenAuthentication')
-}
-
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
@@ -146,8 +141,3 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
-
-if os.getcwd()=='/app':
-    DEBUG=False
-
-CORS_ORIGIN_ALLOW_ALL = True
