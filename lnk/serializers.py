@@ -29,14 +29,14 @@ class profile_create (serializers.ModelSerializer):
     
     class Meta:
         model = profile
-        fields = ['id', 'user', 'pics', 'info']
+        fields = ['id', 'user', 'pics', 'info','blank']
 
 class social_serializer (serializers.ModelSerializer):
     user = profile_create()
 
     class Meta:
         model = Social_Media
-        fields = ['user', 'fbk', 'twr', 'ins','whp','snt','gtb']
+        fields = ['user', 'fbk', 'twr', 'ins','whp','snt','gtb','empty']
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)

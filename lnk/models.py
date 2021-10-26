@@ -6,22 +6,40 @@ from django.contrib.auth.models import User
 #profile info
 class profile (models.Model):
     user = models.OneToOneField(User, blank=False, on_delete=models.CASCADE,related_name='profiles')
-    pics = models.CharField(max_length=1000, blank=True)
-    info = models.CharField(max_length=70, blank=True)
+    pics = models.CharField(max_length=1000, blank=True,null=True)
+    info = models.CharField(max_length=70, blank=True,null=True)
 
     def __str__(self):
         return self.user.username
+
+    @property
+    def blank(self):
+        if self.pics == None and self.info == None:
+            answer = True
+            return answer
+        else:
+            answer = False
+            return answer
     
 
 # social media link
 class Social_Media (models.Model):
     user = models.OneToOneField(profile, blank=False, on_delete=models.CASCADE,related_name='slinks')
-    fbk = models.URLField(max_length=1000, blank=True)
-    twr = models.URLField(max_length=1000, blank=True)
-    ins = models.URLField(max_length=1000, blank=True)
-    whp = models.URLField(max_length=1000, blank=True)
-    snt = models.URLField(max_length=1000, blank=True)
-    gtb = models.URLField(max_length=1000, blank=True)
+    fbk = models.URLField(max_length=1000, blank=True, null=True)
+    twr = models.URLField(max_length=1000, blank=True, null=True)
+    ins = models.URLField(max_length=1000, blank=True, null=True)
+    whp = models.URLField(max_length=1000, blank=True, null=True)
+    snt = models.URLField(max_length=1000, blank=True, null=True)
+    gtb = models.URLField(max_length=1000, blank=True, null=True)
+
+    @property
+    def empty(self):
+        if self.fbk == None and self.twr == None and self.ins == None and self.whp == None and self.snt == None and self.gtb == None :
+            answer = True
+            return answer
+        else:
+            answer = False
+            return answer
 
 
 #links to things
